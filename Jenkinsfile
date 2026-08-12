@@ -3,7 +3,20 @@ pipeline {
 	label 'linux'
     }
 
+    options {
+	skipDefaultCheckout(true)
+    }
+
     stages {
+	
+	stage('Checkout') {
+           steps {
+              sh '''
+                  git clone https://github.com/BenjaminAltmann19/sas-midtier-lab.git .
+              '''
+           }
+        }
+
         stage('Validate Files') {
             steps {
                 sh '''
@@ -14,7 +27,7 @@ pipeline {
                 '''
             }
         }
-
+	
         stage('Validate Apache Config') {
             steps {
                 sh '''
